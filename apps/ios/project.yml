@@ -1,0 +1,34 @@
+# Generate the Xcode project with XcodeGen:  brew install xcodegen && xcodegen generate
+name: Wayfare
+options:
+  bundleIdPrefix: com.wayfare
+  deploymentTarget:
+    iOS: "17.0"
+packages:
+  SuperwallKit:
+    url: https://github.com/superwall/Superwall-iOS
+    from: 4.0.0
+targets:
+  Wayfare:
+    type: application
+    platform: iOS
+    sources: [Wayfare]
+    dependencies:
+      - package: SuperwallKit
+    info:
+      path: Wayfare/Info.plist
+      properties:
+        CFBundleDisplayName: Wayfare
+        UILaunchScreen: {}
+        WayfareAPIURL: https://wayfare.example.com
+        SuperwallAPIKey: ""
+        # DEV MODE: skip sign-in (pair with DEV_MODE=true on a local API). Set to false for real accounts.
+        WayfareDevMode: true
+        NSLocationWhenInUseUsageDescription: Wayfare uses your location only to center maps near you.
+        NSPhotoLibraryUsageDescription: Wayfare reads the screenshot you pick to find the places in it.
+        CFBundleURLTypes:
+          - CFBundleURLSchemes: [wayfare]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.wayfare.app
+        SWIFT_VERSION: "5.10"

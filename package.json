@@ -1,0 +1,21 @@
+{
+  "name": "wayfare",
+  "private": true,
+  "workspaces": [
+    "packages/shared",
+    "apps/api",
+    "apps/web"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w @wayfare/api",
+    "dev:web": "npm run dev -w @wayfare/web",
+    "build": "npm run build -w @wayfare/web",
+    "typecheck": "npm run typecheck --workspaces --if-present && npm run typecheck --prefix apps/mobile",
+    "db:migrate:local": "npm run db:migrate:local -w @wayfare/api",
+    "deploy": "npm run build && npm run deploy -w @wayfare/api",
+    "eval:models": "node --experimental-strip-types scripts/eval-models.ts"
+  },
+  "dependencies": {
+    "expo": "^58.0.21"
+  }
+}

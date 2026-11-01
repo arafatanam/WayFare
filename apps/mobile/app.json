@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "Wayfare",
+    "slug": "wayfare",
+    "scheme": "wayfare",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "android": {
+      "package": "com.wayfare.app",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "POST_NOTIFICATIONS"
+      ]
+    },
+    "ios": {
+      "bundleIdentifier": "com.wayfare.app"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-notifications",
+        {
+          "color": "#0f766e"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Wayfare reads the screenshot you pick to find the places in it."
+        }
+      ],
+      "@react-native-community/datetimepicker",
+      "expo-font"
+    ],
+    "extra": {
+      "apiUrl": "",
+      "superwallAndroidKey": "",
+      "superwallIosKey": "",
+      "devMode": true
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "wayfare",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // The React web app is served by this same Worker so auth cookies stay first-party.
+  "assets": {
+    "directory": "../web/dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+
+  "d1_databases": [
+    { "binding": "DB", "database_name": "wayfare-db", "database_id": "REPLACE_WITH_D1_ID", "migrations_dir": "migrations" }
+  ],
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "wayfare-media" }],
+  "kv_namespaces": [{ "binding": "KV", "id": "REPLACE_WITH_KV_ID" }],
+
+  "durable_objects": {
+    "bindings": [{ "name": "TRIP_ROOM", "class_name": "TripRoom" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["TripRoom"] }],
+
+  "queues": {
+    "producers": [{ "binding": "IMPORT_QUEUE", "queue": "wayfare-imports" }],
+    "consumers": [{ "queue": "wayfare-imports", "max_batch_size": 5, "max_retries": 2, "dead_letter_queue": "wayfare-imports-dlq" }]
+  },
+
+  "workflows": [
+    { "name": "itinerary-workflow", "binding": "ITINERARY_WORKFLOW", "class_name": "ItineraryWorkflow" }
+  ],
+
+  // Daily trip reminders.
+  "triggers": { "crons": ["0 8 * * *"] },
+
+  "vars": {
+    "APP_URL": "http://localhost:5173",
+    "AI_MODEL": "deepseek/deepseek-chat",
+    "AI_VISION_MODEL": "google/gemini-2.5-flash",
+    "AI_GATEWAY_ID": "wayfare",
+    "STRIPE_PRICE_PRO": ""
+  },
+  "observability": { "enabled": true }
+}

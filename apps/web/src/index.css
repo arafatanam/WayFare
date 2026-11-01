@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@import "maplibre-gl/dist/maplibre-gl.css";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+
+  --color-brand-50: #f0fdfa;
+  --color-brand-100: #ccfbf1;
+  --color-brand-200: #99f6e4;
+  --color-brand-500: #14b8a6;
+  --color-brand-600: #0d9488;
+  --color-brand-700: #0f766e;
+  --color-brand-800: #115e59;
+  --color-brand-900: #134e4a;
+
+  --color-sun-400: #fb923c;
+  --color-sun-500: #f97316;
+
+  --color-ink: #0f172a;
+  --color-muted: #64748b;
+  --color-line: #e2e8f0;
+  --color-canvas: #f8fafc;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+  }
+  h1, h2, h3 {
+    @apply text-ink;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 h-10 text-sm font-semibold transition select-none
+    disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap;
+}
+@utility btn-primary {
+  @apply btn bg-brand-700 text-white hover:bg-brand-800 active:bg-brand-900 shadow-sm;
+}
+@utility btn-secondary {
+  @apply btn bg-white text-ink border border-line hover:bg-slate-50;
+}
+@utility btn-ghost {
+  @apply btn text-ink hover:bg-slate-100;
+}
+@utility btn-danger {
+  @apply btn bg-red-600 text-white hover:bg-red-700;
+}
+@utility btn-sm {
+  @apply h-8! px-3! text-xs! rounded-lg!;
+}
+@utility icon-btn {
+  @apply inline-flex items-center justify-center size-10 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-ink transition;
+}
+@utility input {
+  @apply w-full h-11 rounded-xl border border-line bg-white px-3.5 text-sm placeholder:text-slate-400
+    focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition;
+}
+@utility label {
+  @apply block text-sm font-medium text-slate-700 mb-1.5;
+}
+@utility card {
+  @apply bg-white rounded-2xl border border-line shadow-[0_1px_2px_rgba(15,23,42,0.04)];
+}
+@utility chip {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3 h-8 text-xs font-medium text-slate-700
+    hover:border-slate-300 transition whitespace-nowrap;
+}
+@utility chip-active {
+  @apply border-brand-600! bg-brand-50! text-brand-800!;
+}
+@utility page {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-6 pb-28 lg:pb-10;
+}
+@utility page-title {
+  @apply font-display text-3xl sm:text-4xl font-bold tracking-tight;
+}
+@utility section-title {
+  @apply text-lg font-semibold;
+}
+@utility skeleton {
+  @apply animate-pulse bg-slate-200/70 rounded-xl;
+}
+
+textarea.input {
+  @apply h-auto py-2.5 min-h-24;
+}
+
+.maplibregl-popup-content {
+  @apply rounded-xl! shadow-lg! p-3!;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Onboarding: slow collage drift on the Get Started screen, floating app icons around the phone. */
+@keyframes wf-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-40px); }
+}
+@keyframes wf-float {
+  0%, 100% { transform: translateY(-4px); }
+  50% { transform: translateY(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [class*="animate-[wf-"] { animation: none !important; }
+}

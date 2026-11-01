@@ -1,0 +1,10 @@
+node_modules
+dist
+.wrangler
+.dev.vars
+.env
+*.log
+apps/mobile/.expo
+apps/ios/*.xcodeproj
+apps/ios/build
+apps/mobile/node_modules

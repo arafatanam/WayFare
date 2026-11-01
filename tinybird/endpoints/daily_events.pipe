@@ -1,0 +1,13 @@
+DESCRIPTION >
+    Daily event counts and unique users, for a product dashboard.
+
+NODE daily
+SQL >
+    %
+    SELECT toDate(timestamp) AS day, event, count() AS events, uniq(user_hash) AS users
+    FROM app_events
+    WHERE timestamp >= now() - interval {{ Int32(days, 30) }} day
+    GROUP BY day, event
+    ORDER BY day DESC, events DESC
+
+TYPE endpoint

@@ -1,0 +1,13 @@
+DESCRIPTION >
+    Product events from the Wayfare API. user_hash is a salted hash; no PII is stored.
+
+SCHEMA >
+    `timestamp` DateTime64(3) `json:$.timestamp`,
+    `event` LowCardinality(String) `json:$.event`,
+    `user_hash` String `json:$.user_hash`,
+    `props` String `json:$.props`
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(timestamp)"
+ENGINE_SORTING_KEY "event, timestamp"
+ENGINE_TTL "toDateTime(timestamp) + INTERVAL 13 MONTH"

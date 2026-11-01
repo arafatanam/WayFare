@@ -1,0 +1,31 @@
+# Copy to .dev.vars for local development. Use `wrangler secret put NAME` in production.
+BETTER_AUTH_SECRET=change-me-to-a-long-random-string
+OPENROUTER_API_KEY=
+# Optional: route AI calls through Cloudflare AI Gateway (account id + gateway id in vars).
+CF_ACCOUNT_ID=
+CF_AIG_TOKEN=
+# Optional: self-hosted OpenAI-compatible endpoint (vLLM on RunPod / Vast.ai). Used when AI_PROVIDER=selfhosted.
+AI_PROVIDER=openrouter
+SELFHOSTED_AI_URL=
+SELFHOSTED_AI_KEY=
+SELFHOSTED_AI_MODEL=
+# Optional: Google Places (better place search). Falls back to OpenStreetMap Photon/Nominatim.
+GOOGLE_PLACES_API_KEY=
+# Optional: OSRM-compatible routing server for real travel times.
+ROUTING_URL=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+RESEND_API_KEY=
+EMAIL_FROM=Wayfare <hello@example.com>
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+SUPERWALL_WEBHOOK_SECRET=
+TINYBIRD_TOKEN=
+TINYBIRD_HOST=https://api.tinybird.co
+
+# R&D: skip sign-in, onboarding, quotas and paywalls (only works while APP_URL is localhost)
+DEV_MODE=true
+
+# Groq (OpenAI-compatible, free tier). When set, all AI features use Groq instead of OpenRouter.
+# GROQ_MODEL defaults to openai/gpt-oss-120b; GROQ_VISION_MODEL (screenshots) to qwen/qwen3.8-27b.
+GROQ_API_KEY=
